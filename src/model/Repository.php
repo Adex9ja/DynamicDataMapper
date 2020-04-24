@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager;
 
-include_once 'UserEntity.php';
+include_once 'ProvidersEntity.php';
     require __DIR__ . '/../utils/JsonResponse.php';
 
     class Repository
@@ -20,7 +20,7 @@ include_once 'UserEntity.php';
         {
             $response = new JsonResponse;
             if($parsedBody != null){
-                $user = new UserEntity;
+                $user = new ProvidersEntity;
                 $fields = $parsedBody['data'];
                 $data = [];
                 foreach ($fields as $item){
@@ -52,7 +52,7 @@ include_once 'UserEntity.php';
             if( $first && $second  && $third){
                 $symbol = $timestamp == 'lt' ? '<' : '>';
                 $db = $this->capsule->getConnection();
-                $sql = "SELECT name, age, timestamp from user_entity where provider_id = '". $args['providerId'] ."' or name = '". $name[1] ."' or age = ". $age[1] ." or timestamp " . $symbol . " " . $timestamp[1];
+                $sql = "SELECT name, age, timestamp from providers_entity where provider_id = '". $args['providerId'] ."' or name = '". $name[1] ."' or age = ". $age[1] ." or timestamp " . $symbol . " " . $timestamp[1];
                 return $db->select( $db->raw($sql) );
             }
             else

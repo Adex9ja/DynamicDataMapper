@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
 require __DIR__ . '/../../vendor/autoload.php';
-class UserEntity extends Model
+class ProvidersEntity extends Model
 {
-    protected $table = "user_entity";
+    protected $table = "providers_entity";
     public $timestamps = false;
 }
