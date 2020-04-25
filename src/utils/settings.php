@@ -1,6 +1,6 @@
 <?php
 
-$local = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1' ) ? true : false;
+$local = ($_SERVER['REMOTE_ADDR'] == '192.168.1.20' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1' ) ? true : false;
 $hostname = $local ? 'localhost' : '';
 $db_name = $local ? 'dynamic_data_map' : '';
 $db_user_name = $local ? 'root' : '';
@@ -18,5 +18,6 @@ $settings = [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
         ],
-        ]
+
+    ]
 ];

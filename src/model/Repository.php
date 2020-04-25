@@ -19,24 +19,29 @@ include_once 'ProvidersEntity.php';
         public function registerUser($parsedBody)
         {
             $response = new JsonResponse;
-            if($parsedBody != null){
-                $user = new ProvidersEntity;
-                $fields = $parsedBody['data'];
-                $data = [];
-                foreach ($fields as $item){
-                    $data[] = [
-                        'providerId' => $parsedBody['providerId'],
-                        'name' => $item['name'],
-                        'age' => $item['age'],
-                        'timestamp' => $item['timestamp']
-                    ];
-                }
+            try {
+                if($parsedBody != null){
+                    $fields = $parsedBody['data'];
+                    foreach ($fields as $item){
+                        $data = [
+                            'provider_id' => $parsedBody['providerId'],
+                            'name' => $item['name'],
+                            'age' => $item['age'],
+                            'timestamp' => $item['timestamp']
+                        ];
+                        $user = new ProvidersEntity;
+                        $user->forceFill($data)->saveOrFail();
+                    }
 
-                $result = $user->forceFill($data)->saveOrFail();
-                $desc = $result ? "Registration Successful!" : "Error Occurs";
-                $response = new JsonResponse($result, $desc, $user);
+                    $desc = "Registration Successful!";
+                    $response = new JsonResponse(true, $desc, $user);
+                }
+            }catch (Exception $e){
+                $desc = "Error Occurs!";
+                $response = new JsonResponse(false, $desc, $user);
             }
             return $response;
+
         }
 
 
